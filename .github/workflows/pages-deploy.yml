@@ -1,12 +1,18 @@
 name: Deploy to GitHub Pages
 
 # Deploys the static site to GitHub Pages on every push to main. The CNAME
-# file at repo root is included in the upload, so the custom domain
-# (missaquarius.com) stays mapped on each deploy.
+# file at repo root is included in the upload, so the custom domain stays
+# mapped on each deploy.
 #
-# ONE-TIME SETUP (do this once in the repo on github.com):
+# ONE-TIME SETUP per repo (do this once in the repo settings on github.com):
 #   Repo Settings → Pages → Build and deployment → Source → "GitHub Actions"
 # (Not "Deploy from a branch" — that's the older mode and would conflict.)
+# Switching the Source does not take the live site down; the previous deploy
+# stays served until this workflow's first deploy succeeds.
+#
+# This workflow file is intentionally IDENTICAL across the missaquarius.org
+# and missaquarius.com repos (both are pure-static GitHub Pages sites with
+# CNAMEs). Keep them in sync; do not diverge one without the other.
 
 on:
   push:

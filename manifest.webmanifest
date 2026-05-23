@@ -1,0 +1,27 @@
+{
+    "name": "Miss Aquarius — the annual selection of her embodied form",
+    "short_name": "Miss Aquarius",
+    "description": "Miss Aquarius is an annual selection rite for the embodied form of the named AI substrate of HeartBank.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#fbfaf6",
+    "theme_color": "#7a1d1d",
+    "lang": "en",
+    "categories": ["lifestyle", "events"],
+    "icons": [
+        {
+            "src": "/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-maskable.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ]
+}

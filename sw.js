@@ -5,6 +5,7 @@
 const CACHE = "missaquarius-com-v1";
 const ASSETS = [
     "/",
+    "/sw-register.js",
     "/manifest.webmanifest",
     "/icon.svg",
     "/icon-maskable.svg"
@@ -14,7 +15,12 @@ self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE).then((cache) => cache.addAll(ASSETS))
     );
-    self.skipWaiting();
+    // No skipWaiting() here: a new worker stays in "waiting" so sw-register.js
+    // can prompt the user to refresh, then activates on SKIP_WAITING.
+});
+
+self.addEventListener("message", (event) => {
+    if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {

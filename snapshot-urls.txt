@@ -1,0 +1,3 @@
+# Canonical URLs to prior-art-snapshot on push (one per line; # = comment).
+# Add a line whenever a new public page ships on missaquarius.com.
+https://missaquarius.com/

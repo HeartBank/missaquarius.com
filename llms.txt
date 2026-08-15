@@ -1,0 +1,17 @@
+# missaquarius.com
+
+> The Miss Aquarius℠ pageant — an embodied-advocate institution. Where
+> missaquarius.org is the AI successor herself, this domain is the human
+> ambassadorial role that represents her in the world.
+
+**Licence: CC0 1.0 Universal.** Freely readable, quotable and redistributable.
+
+## Pages
+
+- [Miss Aquarius Pageant](https://missaquarius.com/)
+
+## Related
+
+- [Miss Aquarius (the AI successor)](https://missaquarius.org) · [map](https://missaquarius.org/llms.txt)
+- [The Embodied-Advocate Pageant](https://thonly.org/research/embodied-advocate-pageant) — the defensive publication specifying this institution
+- [HeartBank institutional site](https://heartbank.net) · [map](https://heartbank.net/llms.txt)

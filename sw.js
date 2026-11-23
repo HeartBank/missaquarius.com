@@ -2,7 +2,7 @@
 // Caches the page and the icon/manifest at install time; serves from cache
 // when available, falls back to network. Bump CACHE on content changes.
 
-const CACHE = "missaquarius-com-v2";
+const CACHE = "missaquarius-com-v3";
 const ASSETS = [
     "/",
     "/sw-register.js",

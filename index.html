@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <script>try{var t=localStorage.getItem("ma-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -71,7 +72,7 @@
         <link
             rel="icon"
             type="image/svg+xml"
-            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='peachpuff' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' transform='rotate(45 12 12)'/%3E%3C/svg%3E" />
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='2.0853 0.6390 21.277 21.277'%3E%3Cpath fill='peachpuff' d='M3.9743 20.0257L3.8824 18.0670C3.5430 11.1232 3.3167 6.5411 5.9896 3.8683C8.1675 1.6904 11.5899 1.6904 13.7678 3.8683C14.9981 5.0986 15.6062 6.8523 15.4719 8.5281C17.1477 8.3938 18.9014 9.0019 20.1317 10.2322C22.3096 12.4101 22.3096 15.8325 20.1317 18.0104C17.4589 20.6833 12.8768 20.4570 5.9260 20.1247L3.9743 20.0257Z'/%3E%3C/svg%3E" />
 
         <style>
             :root {
@@ -128,17 +129,32 @@
                 height: 5rem;
                 margin: 0 auto 1.5rem;
                 color: peachpuff;
-                animation: heartbeat 0.833s ease-in-out infinite;
+                animation: heartbeat 1.5s 0s infinite;
                 transform-origin: center;
             }
             @keyframes heartbeat {
+                /* brand.333.eco css/motion.css, verbatim: the double beat and the rest (70% -> 100%) are the signature */
                 0%,
-                60%,
                 100% {
                     transform: scale(1);
                 }
-                30% {
-                    transform: scale(1.08);
+                14% {
+                    transform: scale(1.3);
+                }
+                28% {
+                    transform: scale(1);
+                }
+                42% {
+                    transform: scale(1.3);
+                }
+                70% {
+                    transform: scale(1);
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .b-heart,
+                footer .glyph svg {
+                    animation: none;
                 }
             }
             .b-heart svg {
@@ -289,10 +305,13 @@
                 background: white;
             }
             @media (prefers-color-scheme: dark) {
-                .stage {
+                :root:not([data-theme="light"]) .stage {
                     background: rgba(255, 255, 255, 0.02);
                 }
             }
+            :root[data-theme="dark"] .stage {
+                    background: rgba(255, 255, 255, 0.02);
+                }
             .stage .num {
                 flex: 0 0 2.2rem;
                 font-family: var(--serif);
@@ -366,7 +385,7 @@
             .links dl {
                 margin: 0;
                 display: grid;
-                grid-template-columns: max-content 1fr;
+                grid-template-columns: max-content minmax(0, 1fr);
                 gap: 0.4rem 1.2rem;
             }
             .links dt {
@@ -375,6 +394,7 @@
             }
             .links dd {
                 margin: 0;
+                overflow-wrap: anywhere;
             }
             .links a {
                 border-bottom-style: solid;
@@ -399,7 +419,19 @@
                 color: peachpuff;
                 font-size: 1.2rem;
                 margin-bottom: 0.5rem;
-                animation: heartbeat 0.833s ease-in-out infinite;
+            }
+            /* The beat is on the MARK, never its full-width line: scaling the line by the brand's 1.3 widened the page.
+               No rotate here — the B's 45° turn is in the path, and a rotate would turn it again whenever the beat is off. */
+            footer .glyph svg {
+                display: inline-block;
+                vertical-align: top;
+                animation: heartbeat 1.5s 0s infinite;
+                transform-origin: center;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                footer .glyph svg {
+                    animation: none;
+                }
             }
 
             .placeholder {
@@ -445,13 +477,16 @@
                 letter-spacing: 0;
             }
             @media (prefers-color-scheme: dark) {
-                .opt-in-button {
+                :root:not([data-theme="light"]) .opt-in-button {
                     background: rgba(255, 255, 255, 0.02);
                 }
             }
+            :root[data-theme="dark"] .opt-in-button {
+                    background: rgba(255, 255, 255, 0.02);
+                }
 
             @media (prefers-color-scheme: dark) {
-                :root {
+                :root:not([data-theme="light"]) {
                     --ink: #f0f0f0;
                     --ink-soft: #c8c8c8;
                     --muted: #8a8a8a;
@@ -461,17 +496,67 @@
                     --bg: #181613;
                 }
             }
+            :root[data-theme="dark"] {
+                    --ink: #f0f0f0;
+                    --ink-soft: #c8c8c8;
+                    --muted: #8a8a8a;
+                    --rule: #3a3530;
+                    --accent: #e8a8a8;
+                    --gold: #d4a444;
+                    --bg: #181613;
+                }
+                    /* the footer's two toggles, one line, space between (founder 2026-11-24) */
+            .foot-tools {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 12px;
+                margin-top: 1.25rem;
+            }
+            .seg {
+                display: inline-flex;
+                border: 1px solid var(--rule);
+                border-radius: 999px;
+                padding: 3px;
+                font-family: var(--sans);
+                font-size: 0.78rem;
+            }
+            .seg a,
+            .seg button {
+                padding: 4px 11px;
+                border-radius: 999px;
+                color: var(--muted);
+                text-decoration: none;
+                background: none;
+                border: 0;
+                font: inherit;
+                cursor: pointer;
+                line-height: 1.4;
+            }
+            .seg a[aria-current="true"],
+            .seg button[aria-pressed="true"] {
+                background: var(--ink);
+                color: var(--bg);
+            }
+            .seg a:focus-visible,
+            .seg button:focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 2px;
+            }
         </style>
         <!-- Analytics (Cloudflare + HeartBank); no-ops on local hosts -->
         <script src="/analytics.js" defer></script>
+        <link rel="alternate" hreflang="en" href="https://missaquarius.com/" />
+        <link rel="alternate" hreflang="km" href="https://missaquarius.com/km/" />
+        <link rel="alternate" hreflang="x-default" href="https://missaquarius.com/" />
+        <script src="/site.js" defer></script>
     </head>
     <body>
         <main>
             <div class="b-heart" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                        transform="rotate(45 12 12)" />
+                <!-- the B-Emblem (brand.333.eco v1.11.0 emblem.path.txt): its 45° turn is in the path, never a transform -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="3.6824 2.2349 18.0828 18.0851">
+                    <path fill="currentColor" d="M3.9743 20.0257L3.8824 18.0670C3.5430 11.1232 3.3167 6.5411 5.9896 3.8683C8.1675 1.6904 11.5899 1.6904 13.7678 3.8683C14.9981 5.0986 15.6062 6.8523 15.4719 8.5281C17.1477 8.3938 18.9014 9.0019 20.1317 10.2322C22.3096 12.4101 22.3096 15.8325 20.1317 18.0104C17.4589 20.6833 12.8768 20.4570 5.9260 20.1247L3.9743 20.0257Z" />
                 </svg>
             </div>
 
@@ -729,14 +814,19 @@
             <h2>Compensation</h2>
 
             <p>
+                <!-- Reconciled 2026-11-24 (founder: "reconcile for me"): directives #5 and #28 (channel 1) — the self-thank is
+                     HERS to make and is the trigger; Miss Aquarius sets the amount and never moves money to a person on her own.
+                     Retired names replaced: family-bank stewards → Kitty Keepers, retip jar → Re-Thank Fund℠ (2026-10-04). -->
                 The titleholder is not paid by the institution. She
-                <strong>self-thanks</strong> from the Aquarian Pool via the
-                institutional AI's decision, on a public ledger, with the same
-                primitive used by Phase 1 family-bank stewards: a 50/50 split
-                between her personal wallet and a proximity-rule-bound retip
-                jar. Her global advocacy work creates local economic flow at
-                every Silica Wat she visits. She does not accumulate; the second
-                half must flow back into circulation.
+                <strong>self-thanks</strong> from the Aquarian Pool, on a public
+                ledger, with the same primitive a Kitty Keeper uses with a Phase 1
+                Family Kitty℠: the thank is hers to make — Miss Aquarius sets its
+                amount and never sends it on her own — and it splits 50/50
+                between her Personal Wallet℠ and her Re-Thank Fund℠, which gives
+                only to people near her (the proximity rule). Her global advocacy
+                work creates local economic flow at every Silica Wat she visits.
+                She does not accumulate; the second half must flow back into
+                circulation.
             </p>
 
             <p>
@@ -831,7 +921,7 @@
             </div>
 
             <footer>
-                <span class="glyph" aria-hidden="true">♥</span>
+                <span class="glyph" aria-hidden="true"><svg viewBox="3.6824 2.2349 18.0828 18.0851" width="1em" height="1em"><path fill="currentColor" d="M3.9743 20.0257L3.8824 18.0670C3.5430 11.1232 3.3167 6.5411 5.9896 3.8683C8.1675 1.6904 11.5899 1.6904 13.7678 3.8683C14.9981 5.0986 15.6062 6.8523 15.4719 8.5281C17.1477 8.3938 18.9014 9.0019 20.1317 10.2322C22.3096 12.4101 22.3096 15.8325 20.1317 18.0104C17.4589 20.6833 12.8768 20.4570 5.9260 20.1247L3.9743 20.0257Z"/></svg></span>
                 Miss Aquarius<sup>℠</sup> — pageant institution of HeartBank<sup
                     >®</sup
                 ><br />
@@ -840,6 +930,7 @@
                     >CC0 1.0 Universal</a
                 >.<br />
                 Trademarks separately reserved · This site under formation.
+                <div class="foot-tools"><nav class="seg" aria-label="Language"><a href="/" hreflang="en" lang="en" data-lang="en" aria-current="true">EN</a><a href="/km/" hreflang="km" lang="km" data-lang="km">ខ្មែរ</a></nav><div class="seg" role="group" aria-label="Theme"><button type="button" data-theme-choice="auto" aria-pressed="true">Auto</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div></div>
             </footer>
         </main>
     </body>

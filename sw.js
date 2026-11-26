@@ -2,7 +2,7 @@
 // Caches the page and the icon/manifest at install time; serves from cache
 // when available, falls back to network. Bump CACHE on content changes.
 
-const CACHE = "missaquarius-com-v5";
+const CACHE = "missaquarius-com-v6";
 const ASSETS = [
     "/",
     "/site.js",

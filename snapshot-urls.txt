@@ -2,3 +2,5 @@
 # Add a line whenever a new public page ships on missaquarius.com.
 https://missaquarius.com/
 https://missaquarius.com/km/
+https://missaquarius.com/privacy/
+https://missaquarius.com/km/privacy/
